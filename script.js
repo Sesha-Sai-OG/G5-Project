@@ -91,3 +91,93 @@ function loadMessages() {
 
     messagesBox.scrollTop = messagesBox.scrollHeight;
 }
+document.getElementById("matchForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value;
+    const subject = document.getElementById("subject").value;
+    const studyTime = document.getElementById("studyTime").value;
+
+    const matches = [
+        { name: "Aarav", subject: subject, time: studyTime },
+        { name: "Priya", subject: subject, time: studyTime },
+        { name: "Rohan", subject: subject, time: studyTime }
+    ];
+
+    const matchesList = document.getElementById("matchesList");
+    matchesList.innerHTML = "";
+
+    matches.forEach(match => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            ${match.name} - ${match.subject} (${match.time})
+            <button class="chatBtn" data-name="${match.name}">Chat with Partner</button>
+        `;
+        matchesList.appendChild(li);
+    });
+
+    document.getElementById("matches-section").classList.remove("hidden");
+
+    document.querySelectorAll(".chatBtn").forEach(btn => {
+        btn.addEventListener("click", function() {
+            openChat(this.dataset.name);
+        });
+    });
+});
+
+// Chat Feature
+const chatContainer = document.getElementById("chatContainer");
+const chatMessages = document.getElementById("chatMessages");
+const chatMessageInput = document.getElementById("chatMessage");
+
+document.getElementById("closeChat").addEventListener("click", () => {
+    chatContainer.classList.add("hidden");
+});
+
+document.getElementById("sendMessage").addEventListener("click", sendMessage);
+
+function openChat(partnerName) {
+    document.getElementById("chatPartnerName").textContent = `Chat with ${partnerName}`;
+    chatContainer.classList.remove("hidden");
+    loadMessages(partnerName);
+    chatContainer.dataset.partner = partnerName;
+}
+
+function sendMessage() {
+    const text = chatMessageInput.value.trim();
+    if (!text) return;
+
+    const partner = chatContainer.dataset.partner;
+    const messages = JSON.parse(localStorage.getItem(partner)) || [];
+
+    messages.push({ text: text, sender: "me" });
+    localStorage.setItem(partner, JSON.stringify(messages));
+
+    displayMessages(messages);
+
+    // Simulate a reply
+    setTimeout(() => {
+        messages.push({ text: "Got it! Let's study.", sender: "them" });
+        localStorage.setItem(partner, JSON.stringify(messages));
+        displayMessages(messages);
+    }, 1000);
+
+    chatMessageInput.value = "";
+}
+
+function loadMessages(partner) {
+    const messages = JSON.parse(localStorage.getItem(partner)) || [];
+    displayMessages(messages);
+}
+
+function displayMessages(messages) {
+    chatMessages.innerHTML = "";
+    messages.forEach(msg => {
+        const div = document.createElement("div");
+        div.classList.add("message", msg.sender === "me" ? "sent" : "received");
+        div.textContent = msg.text;
+        chatMessages.appendChild(div);
+    });
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+

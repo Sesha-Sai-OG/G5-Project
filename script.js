@@ -47,3 +47,47 @@ function displayMatches(list) {
 
 // Initial load
 displayMatches(profiles);
+function startChat(name) {
+    chatPartner = name;
+    document.getElementById("chatWith").innerText = `Chat with ${name}`;
+    document.getElementById("chatContainer").classList.remove("chat-hidden");
+    loadMessages();
+}
+
+document.getElementById("closeChat").addEventListener("click", function () {
+    document.getElementById("chatContainer").classList.add("chat-hidden");
+});
+
+document.getElementById("sendMessage").addEventListener("click", function () {
+    sendMessage();
+});
+
+document.getElementById("chatMessage").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") sendMessage();
+});
+
+function sendMessage() {
+    const msg = document.getElementById("chatMessage").value.trim();
+    if (!msg) return;
+
+    let messages = JSON.parse(localStorage.getItem(`chat_${currentUser}_${chatPartner}`)) || [];
+    messages.push({ sender: currentUser, text: msg, time: new Date().toLocaleTimeString() });
+    localStorage.setItem(`chat_${currentUser}_${chatPartner}`, JSON.stringify(messages));
+
+    document.getElementById("chatMessage").value = "";
+    loadMessages();
+}
+
+function loadMessages() {
+    const messagesBox = document.getElementById("chatMessages");
+    messagesBox.innerHTML = "";
+
+    let messages = JSON.parse(localStorage.getItem(`chat_${currentUser}_${chatPartner}`)) || [];
+    messages.forEach(m => {
+        const msgDiv = document.createElement("div");
+        msgDiv.innerHTML = `<b>${m.sender}:</b> ${m.text} <small>${m.time}</small>`;
+        messagesBox.appendChild(msgDiv);
+    });
+
+    messagesBox.scrollTop = messagesBox.scrollHeight;
+}

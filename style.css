@@ -75,7 +75,73 @@ h3 {
     font-size: 2.5em;
     color: white;
     text-decoration: none;
+
+    #chatContainer {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+#chatHeader {
+    background: #88b04b;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#chatMessages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background: #f9f9f9;
+}
+
+.message {
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    border-radius: 8px;
+    max-width: 80%;
+}
+
+.sent {
+    background: #d1f0d1;
+    align-self: flex-end;
+}
+
+.received {
+    background: #e1e1e1;
+    align-self: flex-start;
+}
+
+#chatInput {
+    display: flex;
+    border-top: 1px solid #ccc;
+}
+
+#chatInput input {
+    flex: 1;
+    border: none;
+    padding: 10px;
+}
+
+#chatInput button {
+    background: #88b04b;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+
     border-radius: 12px;
     font-weight: bold;
 }
+
 

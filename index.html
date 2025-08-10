@@ -46,16 +46,13 @@
         <h2>Potential Matches</h2>
         <ul id="match-list"></ul>
     </section>
-    <div id="chat-box" class="hidden">
-        <div id="chat-header">
-            <span id="chat-partner-name">Chat</span>
-            <button onclick="closeChat()">X</button>
-        </div>
-        <div id="chat-messages"></div>
-        <div id="chat-input-area">
-            <input type="text" id="chat-input" placeholder="Type your message...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+   <div id="chatContainer" class="chat-hidden">
+    <h3 id="chatWith"></h3>
+    <div id="chatMessages" class="chat-box"></div>
+    <input type="text" id="chatMessage" placeholder="Type your message..." />
+    <button id="sendMessage">Send</button>
+    <button id="closeChat">Close</button>
+</div>
     </div>
     </div>
 
@@ -68,6 +65,7 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
 

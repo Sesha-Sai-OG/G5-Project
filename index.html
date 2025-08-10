@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studymate - Find Your Study Partner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <center><div class="alert"><header>
+        <h1>Studymate</h1>
+        <p>Find Your Perfect Study Partner</p>
+    </header></div></center>
+<hr size="7px" color="black">
+
+    <section id="intro">
+        <h2>Why Studymate?</h2>
+        <p>
+            It’s hard to find someone studying the same subject at the same time. 
+            Studymate helps you connect with students based on your subjects and preferred study times.
+        </p>
+    </section>
+
+    <section id="form-section">
+        <h2>Create / Update Your Profile</h2>
+        <form id="profile-form">
+            <input type="text" id="name" placeholder="Your Name" required>
+            <input type="text" id="subjects" placeholder="Subjects of Interest" required>
+            <input type="text" id="study-hours" placeholder="Preferred Study Hours" required>
+            <input type="text" id="branch" placeholder="Branch (optional)">
+            <input type="text" id="year" placeholder="Year (optional)">
+            <input type="text" id="hostel" placeholder="Hostel (optional)">
+            <button type="submit">Save Profile</button>
+        </form>
+    </section>
+
+    <section id="filter-section">
+        <h2>Find Matches</h2>
+        <input type="text" id="filter-subject" placeholder="Filter by Subject">
+        <input type="text" id="filter-branch" placeholder="Filter by Branch">
+        <input type="text" id="filter-year" placeholder="Filter by Year">
+        <button id="apply-filters">Apply Filters</button>
+    </section>
+
+    <section id="matches">
+        <h2>Potential Matches</h2>
+        <ul id="match-list"></ul>
+    </section>
+
+    <footer>
+        <p>Studymate © 2025</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
